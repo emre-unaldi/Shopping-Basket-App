@@ -4,6 +4,9 @@ const dotenv = require('dotenv').config({ path: './src/config/.env' });
 const port = process.env.PORT || 3002;
 fastify.register(require('fastify-cors'));
 
+// db
+require('./src/config/db');
+
 fastify.get('/', async (req, reply) => {
     return { message: 'Hello Fastify'}
 });
