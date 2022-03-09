@@ -14,11 +14,22 @@ const Home = () => {
         price: "",
         qty: ""
     })
+    const [showResult, setShowResult] = useState({
+        showBasket: true,
+        showBasketList: false,
+        showBasketMessage: false,
+        showCheckout: false,
+        showComplete: false
+    })
+    
 
     const data = {
         product,
-        setProduct
+        setProduct,
+        showResult,
+        setShowResult
     }
+    console.log(showResult);
   
     return(
         <ProductContext.Provider value={data}>
@@ -27,11 +38,11 @@ const Home = () => {
                 <ProductList/>
                 <div className="container">
                     <div className="row">
-                        <Basket/>
+                        { showResult.showBasket ?  <Basket/> : null }
                         <div className="col-sm-7 pb-5 reveal-step js-reveal-step2">
                             <div className="row">
-                                <Checkout/>
-                                <Complete/>
+                               { showResult.showCheckout ?  <Checkout/> : null }
+                               { showResult.showComplete ? <Complete/> : null }
                             </div> 
                         </div> 
                     </div> 

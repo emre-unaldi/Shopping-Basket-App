@@ -3,7 +3,7 @@ import { ProductContext, useContext } from '../Context/Context';
 
 const Product = () => {
 
-    const { setProduct } = useContext(ProductContext);
+    const { setProduct, setShowResult } = useContext(ProductContext);
 
     const productInfo = ({type, name, price, qty}) => {
         setProduct({
@@ -11,7 +11,14 @@ const Product = () => {
             name,
             price,
             qty
-        });
+        })
+        setShowResult({
+            showBasket: true,
+            showBasketList: true,
+            showCheckout: false,
+            showComplete: false,
+            showBasketMessage: true,
+        })
     }
 
     return(
