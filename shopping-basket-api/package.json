@@ -1,0 +1,21 @@
+{
+  "name": "shopping-basket-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "start:dev": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "fastify": "^3.27.4",
+    "fastify-cors": "^6.0.3",
+    "http-errors": "^2.0.0",
+    "mongoose": "^6.2.5"
+  }
+}
