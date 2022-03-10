@@ -1,12 +1,18 @@
 const fastify = require('fastify')({ logger: true });
 const dotenv = require('dotenv');
+fastify.register(require('fastify-cors'));
 const db = require('./src/config/db');
+const qs = require('qs')
+fastify.register(require('fastify-formbody'), { parser: str => qs.parse(str) })
 
 // dotenv
 dotenv.config({ path: './src/config/.env' });
 
 const port = process.env.PORT || 3002;
-fastify.register(require('fastify-cors'));
+
+// routes
+const productRouter = require('./src/routes/productRouter');
+const basketRouter = require('./src/routes/basketRouter');
 
 // db
 db();
@@ -14,6 +20,14 @@ db();
 fastify.get('/', async (req, reply) => {
     return { message: 'Hello Fastify'}
 });
+
+productRouter.forEach((route, index) => {
+    fastify.route(route)
+})
+
+basketRouter.forEach((route, index) => {
+    fastify.route(route)
+})
 
 const startServer = async () => {
     try {

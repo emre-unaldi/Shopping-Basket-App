@@ -15,7 +15,9 @@
     "dotenv": "^16.0.0",
     "fastify": "^3.27.4",
     "fastify-cors": "^6.0.3",
+    "fastify-formbody": "^5.2.0",
     "http-errors": "^2.0.0",
-    "mongoose": "^6.2.5"
+    "mongoose": "^6.2.5",
+    "qs": "^6.10.3"
   }
 }
