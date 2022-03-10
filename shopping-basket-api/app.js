@@ -1,11 +1,15 @@
 const fastify = require('fastify')({ logger: true });
-const dotenv = require('dotenv').config({ path: './src/config/.env' });
+const dotenv = require('dotenv');
+const db = require('./src/config/db');
+
+// dotenv
+dotenv.config({ path: './src/config/.env' });
 
 const port = process.env.PORT || 3002;
 fastify.register(require('fastify-cors'));
 
 // db
-require('./src/config/db');
+db();
 
 fastify.get('/', async (req, reply) => {
     return { message: 'Hello Fastify'}
