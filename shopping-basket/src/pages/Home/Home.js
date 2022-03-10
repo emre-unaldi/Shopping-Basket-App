@@ -10,6 +10,7 @@ import { ProductContext } from '../../components/Context/Context';
 const Home = () => {
 
     const [products, setProducts] = useState([])
+    const [priceSum, setPriceSum] = useState(0)
     const [showResult, setShowResult] = useState({
         showBasket: true,
         showBasketList: false,
@@ -25,16 +26,16 @@ const Home = () => {
         }
         getProduct()
     }, []);
-
-    console.log(products);
-
+    
     const data = {
         products,
         setProducts,
         showResult,
-        setShowResult
+        setShowResult,
+        priceSum,
+        setPriceSum
     }
-  
+    
     return(
         <ProductContext.Provider value={data}>
             <main role="main">
