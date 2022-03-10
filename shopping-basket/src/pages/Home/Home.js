@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Section from '../../components/Section/Section';
 import ProductList from '../../components/ProductList/ProductList';
 import Basket from '../../components/Basket/Basket';
@@ -8,12 +9,7 @@ import { ProductContext } from '../../components/Context/Context';
 
 const Home = () => {
 
-    const [product, setProduct] = useState({
-        type: "",
-        name: "",
-        price: "",
-        qty: ""
-    })
+    const [products, setProducts] = useState([])
     const [showResult, setShowResult] = useState({
         showBasket: true,
         showBasketList: false,
@@ -21,15 +17,23 @@ const Home = () => {
         showCheckout: false,
         showComplete: false
     })
-    
+
+    useEffect(() => {
+        const getProduct = async () => {
+            const response = await axios.get('http://localhost:3001/api/products');
+            setProducts(response.data)
+        }
+        getProduct()
+    }, []);
+
+    console.log(products);
 
     const data = {
-        product,
-        setProduct,
+        products,
+        setProducts,
         showResult,
         setShowResult
     }
-    console.log(showResult);
   
     return(
         <ProductContext.Provider value={data}>
