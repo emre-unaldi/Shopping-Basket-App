@@ -74,16 +74,13 @@ const BaskedList = () => {
         }
     };
 
-    
-
     return(
         <ul className="list-group mb-3 js-basket-items basket-items">
             {products && 
                 products
                     .filter((element) => element.qty > 0)
                     .map((data, index) => (
-                        <div key={data._id}>
-                            <li className="list-group-item p-3">
+                            <li key={data._id} className="list-group-item p-3">
                                 <p className="mb-0 float-left">
                                     <strong>{data.name}</strong>
                                     <span className="text-muted basket-qty">qty: {data.qty}</span>
@@ -107,7 +104,6 @@ const BaskedList = () => {
                                         </span>
                                 </div>
                             </li>
-                        </div>
                     ))}   
             <div className="your-basket_buttons js-reveal-step1">
                 <button className="js-checkout btn btn-success btn-sm" onClick={getCheckout}>Checkout </button> 

@@ -1,45 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
+
 import Section from '../../components/Section/Section';
 import ProductList from '../../components/ProductList/ProductList';
 import Basket from '../../components/Basket/Basket';
 import Checkout from '../../components/Checkout/Checkout';
 import Complete from '../../components/Complete/Complete';
-import { ProductContext } from '../../components/Context/Context';
+import { ProductContext, useContext } from '../../components/Context/Context';
+
 
 const Home = () => {
 
-    const [products, setProducts] = useState([])
-    const [priceSum, setPriceSum] = useState(0)
-    const [showResult, setShowResult] = useState({
-        showBasket: true,
-        showBasketList: false,
-        showBasketMessage: false,
-        showCheckout: false,
-        showComplete: false
-    })
-    const numberAddProducts = products.filter((element) => element.qty > 0).length;
-    
-    useEffect(() => {
-        const getProduct = async () => {
-            const response = await axios.get('http://localhost:3001/api/products');
-            setProducts(response.data)
-        }
-        getProduct()
-    }, []);
-    
-    const data = {
-        products,
-        setProducts,
-        showResult,
-        setShowResult,
-        priceSum,
-        setPriceSum,
-        numberAddProducts
-    }
+    const { showResult } = useContext(ProductContext);
     
     return(
-        <ProductContext.Provider value={data}>
             <main role="main">
                 <Section/>
                 <ProductList/>
@@ -55,7 +28,6 @@ const Home = () => {
                     </div> 
                 </div> 
             </main>
-        </ProductContext.Provider>
     )
 }
 

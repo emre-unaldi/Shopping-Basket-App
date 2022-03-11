@@ -1,6 +1,10 @@
 import React from 'react';
+import { ProductContext, useContext } from '../../components/Context/Context';
+import OrderList from '../../components/OrderList/OrderList';
 
 const Order = () => {
+    const { priceSum, numberAddProducts} = useContext(ProductContext);
+
     return(
         <div className="view_thank-you">
                 <section className="jumbotron text-center py-4">
@@ -13,25 +17,14 @@ const Order = () => {
                         <div className="col-sm-4 pb-5 mt-5 your-basket">
                             <h5 className="mb-2">Your basket contained:</h5> 
                             <p>
-                                <span className="js-totalItems">1 products</span>
+                                <span className="js-totalItems">{numberAddProducts} products</span>
                             </p>
-                            <ul className="list-group mb-3 js-basket-items basket-items">
-                                <li className="list-group-item p-3">
-                                    <p className="mb-0 float-left">
-                                        <strong>Peas </strong>
-                                        <span className="text-muted basket-qty">qty: 2</span>
-                                    </p>
-                                </li>
-                                <li className="list-group-item p-3">
-                                    <p className="mb-0 float-left">
-                                        <strong>Milk </strong>
-                                        <span className="text-muted basket-qty">qty: 1</span>
-                                    </p>
-                                </li>
-                            </ul> 
+                            
+                                <OrderList/>
+                            
                             <p className="mb-2"><strong>Total cost: </strong></p>
                             <p className="basket-total">
-                                <span className="js-totalCost">2.73 </span> 
+                                <span className="js-totalCost">{priceSum} </span> 
                                 <span className="js-currency">GBP</span>
                             </p> 
                         </div>  
