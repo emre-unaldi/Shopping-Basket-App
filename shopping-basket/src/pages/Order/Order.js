@@ -19,9 +19,7 @@ const Order = () => {
                             <p>
                                 <span className="js-totalItems">{numberAddProducts} products</span>
                             </p>
-                            
-                                <OrderList/>
-                            
+                            <OrderList/>
                             <p className="mb-2"><strong>Total cost: </strong></p>
                             <p className="basket-total">
                                 <span className="js-totalCost">{priceSum} </span> 

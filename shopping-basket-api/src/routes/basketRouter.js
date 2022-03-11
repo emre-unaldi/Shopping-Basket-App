@@ -13,16 +13,6 @@ const basketRouters = [
         handler: basketController.addBasket
     },
     {
-        method: 'DELETE',
-        url: '/api/baskets/:basket_id',
-        handler: basketController.deleteBasket
-    },
-    {
-        method: 'PUT',
-        url: '/api/baskets/:basket_id',
-        handler: basketController.updateBasket
-    },
-    {
         method: 'GET',
         url: '/api/baskets/:basket_id',
         handler: basketController.singleBasket
