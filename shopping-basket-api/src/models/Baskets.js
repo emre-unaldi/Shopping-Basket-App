@@ -10,7 +10,7 @@ const BasketSchema = new Schema({
         trim: true
     },
     price: {
-        type: String,
+        type: Number,
         max: [9999999, '`{PATH}` alanı (`{VALUE}`), ({MAXLENGTH})den küçük olmalıdır.'],
         min: [1, '`{PATH}` alanı (`{VALUE}`), ({MINLENGTH})den büyük olmalıdır.'],
         required: [true, '`{PATH}` alanı zorunludur.'],
@@ -24,10 +24,10 @@ const BasketSchema = new Schema({
         trim: true
     },
     qty: {
-        type: String,
+        type: Number,
         max: [100, '`{PATH}` alanı (`{VALUE}`), ({MAXLENGTH})den küçük olmalıdır.'],
-        min: [1, '`{PATH}` alanı (`{VALUE}`), ({MINLENGTH})den büyük olmalıdır.'],
-        default: 1,
+        min: [0, '`{PATH}` alanı (`{VALUE}`), ({MINLENGTH})den büyük olmalıdır.'],
+        default: 0,
         trim: true
     }
 },{
