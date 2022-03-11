@@ -18,7 +18,8 @@ const Home = () => {
         showCheckout: false,
         showComplete: false
     })
-
+    const numberAddProducts = products.filter((element) => element.qty > 0).length;
+    
     useEffect(() => {
         const getProduct = async () => {
             const response = await axios.get('http://localhost:3001/api/products');
@@ -33,7 +34,8 @@ const Home = () => {
         showResult,
         setShowResult,
         priceSum,
-        setPriceSum
+        setPriceSum,
+        numberAddProducts
     }
     
     return(

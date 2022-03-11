@@ -3,7 +3,12 @@ import { ProductContext, useContext } from '../Context/Context';
 
 const BaskedList = () => {
 
-    const { products, setProducts, setShowResult } = useContext(ProductContext);
+    const { products, setProducts, setShowResult, setPriceSum, priceSum, numberAddProducts } = useContext(ProductContext);
+
+    const priceCalculator = () => {
+        const priceCalculater = products.reduce((a, v) => (a = a + v.qty * v.price), 0);
+        setPriceSum(priceCalculater)
+    }
     const getCheckout = () => {
         setShowResult({
             showBasket: true,
@@ -12,8 +17,10 @@ const BaskedList = () => {
             showComplete: true,
             showBasketMessage: true,
         })
+        priceCalculator()
     }
-    const deleteVisible = () => {
+
+    const clearBasket = () => {
         setShowResult({
             showBasket: true,
             showBasketList: false,
@@ -21,6 +28,13 @@ const BaskedList = () => {
             showComplete: false,
             showBasketMessage: false,
         })
+        setProducts(
+            products.map((element) => {
+                element.qty = 0;
+                return element;
+            })
+        );
+        
     }
 
     const addBasket = ({ name }) => {
@@ -34,9 +48,10 @@ const BaskedList = () => {
                 return element;
             })
         );
+        priceCalculator()
     }
 
-    const removeBasket = ({ name }) => {
+    const removeBasket = ({ name, price }) => {
         setProducts(
           products.map((element) => {
             if (element.name === name) {
@@ -45,7 +60,21 @@ const BaskedList = () => {
             return element;
           })
         );
-      };
+        setPriceSum(priceSum - price)
+        if (numberAddProducts === 1) {
+            setShowResult({
+                showBasket: true,
+                showBasketList: false,
+                showCheckout: false,
+                showComplete: false,
+                showBasketMessage: false,
+            })
+        }else{
+            
+        }
+    };
+
+    
 
     return(
         <ul className="list-group mb-3 js-basket-items basket-items">
@@ -64,7 +93,7 @@ const BaskedList = () => {
                                         className="btn btn-outline-danger btn-sm btn-increment js-remove-item" 
                                         data-type="remove-item" 
                                         data-name="Peas"
-                                        onClick={() => removeBasket({name: data.name})}
+                                        onClick={() => removeBasket({name: data.name, price: data.price})}
                                         >
                                             -
                                         </span>
@@ -80,10 +109,9 @@ const BaskedList = () => {
                             </li>
                         </div>
                     ))}   
-
             <div className="your-basket_buttons js-reveal-step1">
                 <button className="js-checkout btn btn-success btn-sm" onClick={getCheckout}>Checkout </button> 
-                <button className="js-clear btn btn-outline-info btn-sm" onClick={deleteVisible}>Clear basket </button>
+                <button className="js-clear btn btn-outline-info btn-sm" onClick={clearBasket}>Clear basket </button>
             </div>   
         </ul>
     )

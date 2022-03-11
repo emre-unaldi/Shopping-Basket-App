@@ -2,7 +2,7 @@ import React from 'react';
 import { ProductContext, useContext } from '../Context/Context';
 
 const Product = (props) => {
-    const { products, setProducts, setShowResult } = useContext(ProductContext);
+    const { products, setProducts, setShowResult, setPriceSum } = useContext(ProductContext);
     const { name, price, unit } = props;
     
 
@@ -25,6 +25,9 @@ const Product = (props) => {
             showComplete: false,
             showBasketMessage: true,
         })
+
+        const priceCalculater = products.reduce((a, v) => (a = a + v.qty * v.price), 0);
+        setPriceSum(priceCalculater)
     }
 
     return(
