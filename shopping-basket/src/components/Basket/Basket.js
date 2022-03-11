@@ -5,8 +5,6 @@ import { ProductContext, useContext } from '../Context/Context';
 const Basket = () => {
     const { showResult,numberAddProducts } = useContext(ProductContext);
 
-    numberAddProducts
-
     return(
         <div className="col-sm-4 pb-5 your-basket">
             <h5 className="mb-2">Your basket</h5>

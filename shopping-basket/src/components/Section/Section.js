@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const Section = () => {
     return(
       <section className="jumbotron text-center py-4">

@@ -4,7 +4,6 @@ import { ProductContext, useContext } from '../Context/Context';
 const Product = (props) => {
     const { products, setProducts, setShowResult, setPriceSum } = useContext(ProductContext);
     const { name, price, unit } = props;
-    
 
     const productInfo = ({ name }) => {
         setProducts(
@@ -16,7 +15,7 @@ const Product = (props) => {
                 }
                 return element;
             })
-        );
+        )
         
         setShowResult({
             showBasket: true,
@@ -26,7 +25,7 @@ const Product = (props) => {
             showBasketMessage: true,
         })
 
-        const priceCalculater = products.reduce((a, v) => (a = a + v.qty * v.price), 0);
+        const priceCalculater = products.reduce((data, element) => (data = data + element.qty * element.price), 0);
         setPriceSum(priceCalculater)
     }
 
@@ -39,7 +38,9 @@ const Product = (props) => {
                         <p className="text-muted">£ {price} <small>/ {unit} </small></p>
                         <button 
                             onClick={() => productInfo({ name })}
-                            className="js-add-item btn btn-info btn-sm">
+                            className="js-add-item btn btn-info btn-sm"
+                            style={{marginLeft: '80px'}}
+                            >
                             Add <span className="oi oi-plus"></span></button>
                     </div>
                 </div>

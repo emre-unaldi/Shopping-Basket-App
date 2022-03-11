@@ -4,7 +4,7 @@ import {BrowserRouter , Routes, Route} from 'react-router-dom';
 import Home from '../../pages/Home/Home';
 import Order from '../../pages/Order/Order';
 import { ProductContext } from '../Context/Context';
-
+import '../../css/main.css'
 
 const App = () => {
     const [products, setProducts] = useState([])

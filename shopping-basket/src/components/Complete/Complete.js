@@ -19,7 +19,7 @@ const Complete = () => {
             <h5 className="mb-2">Total cost: </h5>
             <p className="basket-total"><span className="js-totalCost">{ priceSum } </span><span className="js-currency">GBP</span></p>
             <button className="js-checkout btn btn-success btn-sm" onClick={addOrderDb}>
-                <Link to="/complete-order">Complete order</Link> 
+                <Link style={{textDecoration: 'none', color: 'white' }} to="/complete-order">Complete order</Link> 
             </button>
         </div>
     )

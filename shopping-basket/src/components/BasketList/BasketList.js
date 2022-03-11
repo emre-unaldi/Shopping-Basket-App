@@ -6,9 +6,10 @@ const BaskedList = () => {
     const { products, setProducts, setShowResult, setPriceSum, priceSum, numberAddProducts } = useContext(ProductContext);
 
     const priceCalculator = () => {
-        const priceCalculater = products.reduce((a, v) => (a = a + v.qty * v.price), 0);
-        setPriceSum(priceCalculater)
+        const priceCalculater = products.reduce((data, element) => (data = data + element.qty * element.price), 0);
+        setPriceSum(Number(priceCalculater.toFixed(2)))
     }
+
     const getCheckout = () => {
         setShowResult({
             showBasket: true,
@@ -28,13 +29,13 @@ const BaskedList = () => {
             showComplete: false,
             showBasketMessage: false,
         })
+
         setProducts(
             products.map((element) => {
                 element.qty = 0;
                 return element;
             })
-        );
-        
+        )
     }
 
     const addBasket = ({ name }) => {
@@ -47,7 +48,7 @@ const BaskedList = () => {
                 }
                 return element;
             })
-        );
+        )
         priceCalculator()
     }
 
@@ -59,8 +60,10 @@ const BaskedList = () => {
             } else element.qty;
             return element;
           })
-        );
-        setPriceSum(priceSum - price)
+        )
+
+        setPriceSum(Number((priceSum - price).toFixed(2)))
+        
         if (numberAddProducts === 1) {
             setShowResult({
                 showBasket: true,
@@ -69,10 +72,8 @@ const BaskedList = () => {
                 showComplete: false,
                 showBasketMessage: false,
             })
-        }else{
-            
         }
-    };
+    }
 
     return(
         <ul className="list-group mb-3 js-basket-items basket-items">
@@ -83,13 +84,14 @@ const BaskedList = () => {
                             <li key={data._id} className="list-group-item p-3">
                                 <p className="mb-0 float-left">
                                     <strong>{data.name}</strong>
-                                    <span className="text-muted basket-qty">qty: {data.qty}</span>
+                                    <span className="text-muted basket-qty"> qty: {data.qty}</span>
                                 </p>
                                 <div className="increment-btns float-right">
                                     <span 
                                         className="btn btn-outline-danger btn-sm btn-increment js-remove-item" 
                                         data-type="remove-item" 
                                         data-name="Peas"
+                                        style={{marginRight: '5px'}}
                                         onClick={() => removeBasket({name: data.name, price: data.price})}
                                         >
                                             -
@@ -105,9 +107,9 @@ const BaskedList = () => {
                                 </div>
                             </li>
                     ))}   
-            <div className="your-basket_buttons js-reveal-step1">
-                <button className="js-checkout btn btn-success btn-sm" onClick={getCheckout}>Checkout </button> 
-                <button className="js-clear btn btn-outline-info btn-sm" onClick={clearBasket}>Clear basket </button>
+            <div className="your-basket_buttons js-reveal-step1 show">
+                <button className="js-checkout btn btn-success btn-sm" style={{margin: '10px 5px 10px 0'}} onClick={getCheckout}>Checkout </button> 
+                <button className="js-clear btn btn-outline-info btn-sm" style={{margin: '10px 5px 10px 0'}} onClick={clearBasket}>Clear basket </button>
             </div>   
         </ul>
     )
