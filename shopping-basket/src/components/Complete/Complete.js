@@ -6,7 +6,7 @@ import { ProductContext, useContext } from '../Context/Context';
 const Complete = () => {
     const { priceSum, products } = useContext(ProductContext);
 
-    const addOrderDb = async() => {
+    const addOrderDb = async () => {
         const getOrderList = await products.filter((e) => e.qty > 0)
         axios.post('http://localhost:3001/api/baskets', { 
             orderList: getOrderList,

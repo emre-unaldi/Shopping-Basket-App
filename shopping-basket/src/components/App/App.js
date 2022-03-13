@@ -7,18 +7,11 @@ import { ProductContext } from '../Context/Context';
 import '../../css/main.css'
 
 const App = () => {
-    const [products, setProducts] = useState([])
-    const [priceSum, setPriceSum] = useState(0)
-    const [showResult, setShowResult] = useState({
-        showBasket: true,
-        showBasketList: false,
-        showBasketMessage: false,
-        showCheckout: false,
-        showComplete: false
-    })
-    
+    const [products, setProducts] = useState([]);
+    const [priceSum, setPriceSum] = useState(0);
+    const [openCheckout, setOpenCheckout] = useState(false);
     const numberAddProducts = products.filter((element) => element.qty > 0).length;
-    
+
     useEffect(() => {
         const getProduct = async () => {
             const response = await axios.get('http://localhost:3001/api/products');
@@ -26,15 +19,27 @@ const App = () => {
         }
         getProduct()
     }, []);
-    
+
+    const priceCalculator = () => {
+        const priceCalculater = products.reduce((data, element) => (data = data + element.qty * element.price), 0);
+        setPriceSum(Number(priceCalculater.toFixed(2)))
+    }
+
+    const qtyCalculator = () => {
+        const qtyCalculator = products.reduce((data, element) => (data = data + element.qty), 0);
+        qtyCalculator === 0 ? setOpenCheckout(false) : null
+    }
+
     const data = {
         products,
         setProducts,
-        showResult,
-        setShowResult,
+        openCheckout,
+        setOpenCheckout,
         priceSum,
         setPriceSum,
-        numberAddProducts
+        numberAddProducts,
+        priceCalculator,
+        qtyCalculator
     }
 
     return(

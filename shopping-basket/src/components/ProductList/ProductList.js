@@ -9,9 +9,10 @@ const ProductList = () => {
         <div className="album py-4 mb-4 product-panel">
             <div className="container"> 
                 <div className="row">
-                    {products.map(get =>
-                        <div key={get._id}>
-                            <Product name={get.name} price={get.price} unit={get.unit} qty={get.qty}/>
+                    {products && 
+                        products.map(data =>
+                        <div key={data._id}>
+                            <Product name={data.name} price={data.price} unit={data.unit} qty={data.qty} id={data._id} />
                         </div>
                     )}
                 </div> 

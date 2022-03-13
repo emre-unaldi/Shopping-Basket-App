@@ -7,21 +7,30 @@ import Complete from '../../components/Complete/Complete';
 import { ProductContext, useContext } from '../../components/Context/Context';
 
 const Home = () => {
-    const { showResult } = useContext(ProductContext);
-    
+    const { openCheckout } = useContext(ProductContext);
+
     return(
         <main role="main">
             <Section/>
             <ProductList/>
             <div className="container">
                 <div className="row">
-                    { showResult.showBasket ?  <Basket/> : null }
-                    <div className="col-sm-7 pb-5 reveal-step js-reveal-step2 show">
-                        <div className="row">
-                           { showResult.showCheckout ?  <Checkout/> : null }
-                           { showResult.showComplete ? <Complete/> : null }
+                <Basket/>
+                    { openCheckout === true ? 
+                        <div className="col-sm-7 pb-5 reveal-step js-reveal-step2 show">
+                            <div className="row">
+                                <Checkout/>
+                                <Complete/>
+                            </div> 
                         </div> 
-                    </div> 
+                        :
+                        <div className="col-sm-7 pb-5 reveal-step js-reveal-step2 hide">
+                            <div className="row">
+                                <Checkout/>
+                                <Complete/>
+                            </div> 
+                        </div> 
+                    }
                 </div> 
             </div> 
         </main>

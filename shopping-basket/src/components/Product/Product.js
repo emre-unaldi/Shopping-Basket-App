@@ -1,11 +1,12 @@
+import axios from 'axios';
 import React from 'react';
 import { ProductContext, useContext } from '../Context/Context';
 
 const Product = (props) => {
-    const { products, setProducts, setShowResult, setPriceSum } = useContext(ProductContext);
-    const { name, price, unit } = props;
+    const { products, setProducts, priceCalculator } = useContext(ProductContext);
+    const { name, price, unit, qty, id } = props;
 
-    const productInfo = ({ name }) => {
+    const productInfo = async ({ name }) => {
         setProducts(
             products.map((element) => {
                 if (element.name === name) {
@@ -16,17 +17,8 @@ const Product = (props) => {
                 return element;
             })
         )
-        
-        setShowResult({
-            showBasket: true,
-            showBasketList: true,
-            showCheckout: false,
-            showComplete: false,
-            showBasketMessage: true,
-        })
-
-        const priceCalculater = products.reduce((data, element) => (data = data + element.qty * element.price), 0);
-        setPriceSum(priceCalculater)
+        await axios.put(`http://localhost:3001/api/products/${id}`, { qty: qty + 1 })
+        priceCalculator()
     }
 
     return(
