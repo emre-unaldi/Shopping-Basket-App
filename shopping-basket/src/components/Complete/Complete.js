@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { ProductContext, useContext } from '../Context/Context';
 
 const Complete = () => {
-    const { priceSum, products, setProducts } = useContext(ProductContext);
+    const { priceSum, products } = useContext(ProductContext);
 
     const addOrderDb = async () => {
         const getOrderList = await products.filter((e) => e.qty > 0)

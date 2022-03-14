@@ -4,7 +4,6 @@ const createError = require('http-errors');
 // Models
 const Baskets = require('../models/Baskets');
 
-// basket listeleme endpointi
 const allBaskets = async (req, reply) => {
     try {
         const getBaskets = await Baskets.find({})
@@ -14,7 +13,6 @@ const allBaskets = async (req, reply) => {
     }
 }
 
-// basket ekleme endpointi
 const addBasket = async (req, reply) => {
     try {
         const addBasket = new Baskets({
@@ -28,7 +26,6 @@ const addBasket = async (req, reply) => {
     }
 }
 
-// verilen id ye göre basket getirme endpointi
 const singleBasket = async (req, reply) => {
     try {
         const basketId = req.params.basket_id

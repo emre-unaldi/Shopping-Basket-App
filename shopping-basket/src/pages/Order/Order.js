@@ -4,7 +4,7 @@ import { ProductContext, useContext } from '../../components/Context/Context';
 import OrderList from '../../components/OrderList/OrderList';
 
 const Order = () => {
-    const { numberAddProducts, baskets, setBaskets, products, setProducts } = useContext(ProductContext);
+    const { numberAddProducts, baskets, setBaskets } = useContext(ProductContext);
 
     useEffect(() => {
         for (let index = 0; index < 3; index++) {

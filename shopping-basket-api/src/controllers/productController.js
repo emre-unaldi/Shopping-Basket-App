@@ -4,7 +4,6 @@ const createError = require('http-errors');
 // Models
 const Products = require('../models/Products');
 
-// product listeleme endpointi
 const allProducts = async (req, reply) => {
     try {
         const getProducts = await Products.find({})
@@ -14,7 +13,6 @@ const allProducts = async (req, reply) => {
     }
 }
 
-// product ekleme endpointi
 const addProduct = async (req, reply) => {
     try {
         const addProduct = new Products({
@@ -30,7 +28,6 @@ const addProduct = async (req, reply) => {
     }
 }
 
-// product silme endpointi
 const deleteProduct = async (req, reply) => {
     try {
         const productId = req.params.product_id
@@ -41,7 +38,6 @@ const deleteProduct = async (req, reply) => {
     }
 }
 
-// product güncelleme endpointi
 const updateProduct = async (req, reply) => {
     try {
         const product = Products.findByIdAndUpdate(
@@ -58,7 +54,6 @@ const updateProduct = async (req, reply) => {
     }
 }
 
-// verilen id ye göre product getirme endpointi
 const singleProduct = async (req, reply) => {
     try {
         const productId = req.params.product_id
