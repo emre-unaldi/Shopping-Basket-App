@@ -1,9 +1,23 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import axios from 'axios';
 import { ProductContext, useContext } from '../../components/Context/Context';
 import OrderList from '../../components/OrderList/OrderList';
 
 const Order = () => {
-    const { priceSum, numberAddProducts} = useContext(ProductContext);
+    const { numberAddProducts, baskets, setBaskets, products, setProducts } = useContext(ProductContext);
+
+    useEffect(() => {
+        for (let index = 0; index < 3; index++) {
+            const getBaskets = async () => {
+                const response = await axios.get('http://localhost:3001/api/baskets');
+                setBaskets(response.data)
+            }
+            getBaskets()
+        }
+    }, []);
+
+    const lastAddedOrderPrice = baskets.map((data) => data.totalPrice)[baskets.length - 1];
+    console.log(lastAddedOrderPrice);
 
     return(
         <div className="view_thank-you">
@@ -22,7 +36,7 @@ const Order = () => {
                         <OrderList/>
                         <p className="mb-2"><strong>Total cost: </strong></p>
                         <p className="basket-total">
-                            <span className="js-totalCost">{priceSum} </span> 
+                            <span className="js-totalCost">{lastAddedOrderPrice} </span> 
                             <span className="js-currency">GBP</span>
                         </p> 
                     </div>  

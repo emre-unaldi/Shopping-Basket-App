@@ -8,6 +8,7 @@ import '../../css/main.css'
 
 const App = () => {
     const [products, setProducts] = useState([]);
+    const [baskets, setBaskets] = useState([]);
     const [priceSum, setPriceSum] = useState(0);
     const [openCheckout, setOpenCheckout] = useState(false);
     const numberAddProducts = products.filter((element) => element.qty > 0).length;
@@ -33,6 +34,8 @@ const App = () => {
     const data = {
         products,
         setProducts,
+        baskets,
+        setBaskets,
         openCheckout,
         setOpenCheckout,
         priceSum,
